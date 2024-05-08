@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom'; 
 import Home from "./pages/Home"
+import Admin from "./pages/Admin"
 import './index.css'
 
 const App = () => {
@@ -8,6 +9,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Home/>}/>
+        <Route path="/admin" element={<Admin/>}/>
       </Routes>
     </Router>
   )
