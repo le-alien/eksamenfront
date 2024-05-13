@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import Navigationbar from "../components/Navigationbar.tsx"
 import "../index.css"
 
 export default () => {
-    
     return (
-        <div></div>
+        <div>
+            <Navigationbar></Navigationbar>
+            
+        </div>
     )
 }
