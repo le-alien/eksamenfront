@@ -1,6 +1,7 @@
 import { useState } from "react"
 import "../index.css"
 import { useNavigate  } from "react-router-dom"
+import Navigationbar from "../components/Navigationbar";
 
 export default () => {
     const navigate = useNavigate();
@@ -32,11 +33,14 @@ export default () => {
     }
 
     return(
+    <div>
+        <Navigationbar></Navigationbar>
         <div className="flex justify-center flex-col justify-items-center max-w-30 m-1">
             <h2 className="self-center">Login!</h2>
             <input className="my-2 w-20 self-center" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="username"></input>
             <input className="my-2 w-20 self-center" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="password"></input>
             <button onClick={checkInfo}>send</button>
         </div>
+    </div>
     )
 }

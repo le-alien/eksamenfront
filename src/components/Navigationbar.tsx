@@ -15,9 +15,21 @@ export const Navigationbar: React.FC = () => {
                         Forum
                    </span>
                 </Link>
-                <Link to="/login" className="flex">
+            </div>
+            <div className="flex flex-row justify-center">
+                <Link to="/admin" className="flex mx-1">
                     <span>
                         Admin
+                    </span>
+                </Link>
+                <Link to="/login" className="flex mx-1">
+                    <span>
+                        Login
+                    </span>
+                </Link>
+                <Link to="/register" className="flex mx-1">
+                    <span>
+                        Register
                     </span>
                 </Link>
             </div>
