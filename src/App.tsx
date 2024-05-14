@@ -5,6 +5,7 @@ import Admin from "./pages/Admin"
 import './index.css'
 import Login from './pages/Login';
 import Register from './pages/Register';
+import FAQ from './pages/FAQ';
 
 const App = () => {
   return(
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/admin" element={<Admin/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
+        <Route path="/faq" element={<FAQ/>}/>
       </Routes>
     </Router>
   )

@@ -32,6 +32,11 @@ export const Navigationbar: React.FC = () => {
                         Register
                     </span>
                 </Link>
+                <Link to="/faq" className="flex mx-1">
+                    <span>
+                        FAQ
+                    </span>
+                </Link>
             </div>
         </div>
     );
