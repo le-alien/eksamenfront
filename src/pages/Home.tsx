@@ -31,7 +31,7 @@ export default () => {
                     <div className="flex bg-lightBrownMountain border-cloudWhite flex-row items-start">
                         <a href="/GeneralBoard" className="flex">
                             <span className="content-center">
-                                <img className="w-14 h-4/5 mt-1 ml-1" src="src\assets\mellpond.gif" alt="" />
+                                <img className="w-14 h-4/5 mt-1 ml-1" src="src\assets\diagram.png" alt="" />
                             </span>
                             <div className="flex flex-col mx-2">
                                 <Headerxl>
@@ -46,7 +46,7 @@ export default () => {
                     <div className="flex bg-lightBrownMountain border-cloudWhite flex-row items-start">
                         <a href="/CurrentBoard" className="flex">
                             <span className="content-center">
-                                <img className="w-14 h-4/5 mt-1 ml-1" src="src\assets\mellpond.gif" alt="" />
+                                <img className="w-14 h-4/5 mt-1 ml-1" src="src\assets\diagram.png" alt="" />
                             </span>
                             <div className="flex flex-col mx-2">
                                 <Headerxl>
@@ -61,7 +61,7 @@ export default () => {
                     <div className="flex bg-lightBrownMountain border-cloudWhite flex-row items-start">
                         <a href="/CurrentBoard" className="flex">
                             <span className="content-center">
-                                <img className="w-14 h-4/5 mt-1 ml-1" src="src\assets\mellpond.gif" alt="" />
+                                <img className="w-14 h-4/5 mt-1 ml-1" src="src\assets\diagram.png" alt="" />
                             </span>
                             <div className="flex flex-col mx-2">
                                 <Headerxl>
@@ -76,7 +76,7 @@ export default () => {
                     <div className="flex bg-lightBrownMountain border-cloudWhite flex-row items-start">
                         <a href="/CurrentBoard" className="flex">
                             <span className="content-center">
-                                <img className="w-14 h-4/5 mt-1 ml-1" src="src\assets\mellpond.gif" alt="" />
+                                <img className="w-14 h-4/5 mt-1 ml-1" src="src\assets\diagram.png" alt="" />
                             </span>
                             <div className="flex flex-col mx-2">
                                 <Headerxl>
