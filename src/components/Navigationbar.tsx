@@ -3,7 +3,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import "../index.css";
 
 export const Navigationbar: React.FC = () => {
-    const navigate = useNavigate;
+    const navigate = useNavigate();
     return (
         <div className="h-13 bg-darkBlueMountain flex items-center flex-row">
             <div className="text-3xl ml-4 flex-row">
@@ -37,6 +37,9 @@ export const Navigationbar: React.FC = () => {
                         FAQ
                     </span>
                 </Link>
+            </div>
+            <div className="flex w-full justify-end mr-2">
+                <span onClick={() => navigate("/user")} className={`text-xl self-end hover:cursor-pointer ${localStorage.getItem("admin") ? '' : 'hidden' }`}>{localStorage.getItem("username")}</span>
             </div>
         </div>
     );

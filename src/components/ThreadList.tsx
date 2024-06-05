@@ -3,21 +3,36 @@ import { ReactNode, useEffect, useState } from "react";
 import "../index.css"
 import ErrorEl from "./ErrorEl";
 import Headerxl from "./Headerxl";
+import { useLocation } from "react-router-dom";
 
 interface userData {
     bigArr: Array<string | boolean>
 }
 
 
-export default () => {
+const ThreadList: React.FC = () => {
     const [userArr, setUserArr] = useState<Array<any>>([])
     const [errorField, setErrorField] = useState<string>("");
     const [isAdmin, setIsAdmin] = useState<boolean>();
 
-    const apiFetch = async () => {
+    const createThread = async () => {
+        try {
+            const location = useLocation();
+            const currentPath = location.pathname;
+            console.log(currentPath)
+            fetch("http://localhost:7175/api/", {
+
+            })
+
+        } catch(error) {
+            console.error("erorr: ", error)
+        }
+    }
+
+    const getThreads = async () => {
         try {
             console.log("trying")
-            fetch("http://localhost:7175/api/getAllUsers", {
+            fetch("http://localhost:7175/api/getThreadsBoardid/", {
                 method: "GET",
                 mode: "cors",
             }).then((response) => {
@@ -47,14 +62,6 @@ export default () => {
         }
     }
 
-    const isAdminCheck = async () => {
-        try {
-
-        } catch (error) {
-            console.error("error: ", error)
-        }
-    }
-
     const changeAdmin = async (username: string, admin: boolean) => {
         try {
             let isAdminChangeValue = !admin
@@ -68,8 +75,7 @@ export default () => {
                 if (data.error) {
                     console.log("something went wrong: ", data.error)
                 } else {
-                    setTimeout(() => {}, 1000);
-                    apiFetch();
+                
                 }
             })
         } catch (error) {
@@ -78,12 +84,8 @@ export default () => {
     }
     
     useEffect(() => {
-        apiFetch();
-    },[])
-
-    useEffect(() => {
-
-    }, [isAdmin])
+        // load threads on page load
+    },[])   
 
     return (
         <div className="bg-slate-400">
@@ -92,7 +94,7 @@ export default () => {
                     <div key={index} className="my-8 w-3/5 h-fit p-2 bg-lightBlueMountain rounded-md">
                         <div className="ml-2">
                             <div className="flex flex-col mb-2">
-                                <Headerxl>{user.obj.username}</Headerxl>
+                                <Headerxl>{user.obj.Header}</Headerxl>
                                 <span>created: {user.obj.user_timestamp}</span>
                             </div>
 
@@ -119,3 +121,5 @@ export default () => {
         
     )
 }
+
+export default ThreadList;
