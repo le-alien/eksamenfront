@@ -68,13 +68,41 @@ export default () => {
                 if (data.error) {
                     console.log("something went wrong: ", data.error)
                 } else {
+                    console.log("gjør ingenting")
+                    setIsAdmin(!isAdmin);
                     setTimeout(() => {}, 1000);
-                    apiFetch();
                 }
             })
         } catch (error) {
             console.error("error: ", error)
         }
+    }
+
+
+    const printUsers = () => {
+        userArr.map((user, index) =>(
+            <div key={index} className="my-8 w-3/5 h-fit p-2 bg-lightBlueMountain rounded-md">
+                <div className="ml-2">
+                    <div className="flex flex-col mb-2">
+                        <Headerxl>{user.obj.username}</Headerxl>
+                        <span>created: {user.obj.user_timestamp}</span>
+                    </div>
+
+                    <div className="flex flex-col mb-2">
+                        <span>id: {user.obj.user_id}</span>
+                        <span>email: {user.obj.email}</span>
+                    </div>
+                    <div className="flex">
+                        <button className="bg-cloudWhite rounded-md self-end hover:bg-slate-200" onClick={() => changeAdmin(user.obj.username, user.obj.admin)}>change</button>
+                        <span className="ml-2">admin: {user.obj.admin.toString()}</span>
+                    </div>
+                    <div className="flex">
+                        <button className="bg-cloudWhite rounded-md self-end hover:bg-slate-200">change</button>
+                        <span className="ml-2">banned: {user.obj.banned.toString()}</span>
+                    </div>
+                </div>
+            </div>
+        ))
     }
     
     useEffect(() => {
@@ -82,12 +110,15 @@ export default () => {
     },[])
 
     useEffect(() => {
-
+        apiFetch();
     }, [isAdmin])
 
     return (
         <div className="bg-slate-400">
             <div className="flex items-center flex-col w-screen">
+                {
+
+                }
                 {userArr.map((user, index) =>(
                     <div key={index} className="my-8 w-3/5 h-fit p-2 bg-lightBlueMountain rounded-md">
                         <div className="ml-2">
