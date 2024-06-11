@@ -9,17 +9,15 @@ export default () => {
     const [username, setUsername] = useState<string>("")
     const [password, setPassword] = useState<string>("")
 
-    const [responseStatus, setResponseStatus] = useState<number>(0)
     const [errorField, setErrorField] = useState<string>("")
     const checkInfo = async () => {
         if (username == '' || password == '') {
             setErrorField("You need to fill out all the fields")
         } else {
             try{
-                const body = `{\"username\":\"${username}\", \"passwordhash\":\"${password}\"}`
+                const body = `{\"Username\":\"${username}\", \"Password\":\"${password}\"}`
     
-                console.log(body);
-                fetch("http://localhost:7175/api/login", {
+                fetch("http://localhost:5000/api/UserController/Login", {
                     method: "POST",
                     mode: "cors",
                     headers: {
@@ -27,25 +25,19 @@ export default () => {
                     },
                     body: JSON.parse(JSON.stringify(body))
                 }).then((response) => {
-                    console.log("res status: ", response.status);
-                    setResponseStatus(response.status);
                     return response.json();
                 }).then((data) => {
                     if (data.error) { 
-                        console.log("Here is the setResponse", responseStatus)
                         setErrorField(data.error)
-                        console.log("something is wrong if this is not undefined", data.message)
                     } else {
                         console.log(data)
                         localStorage.setItem("logged-in", "true");
                         localStorage.setItem("username", data.username);
                         localStorage.setItem("admin", data.admin);
-                        localStorage.setItem("user_id", data.user_id)
                         navigate("/");
                     };
                 });
             } catch(error){
-                console.error("error" + error)
             }
         }
     }

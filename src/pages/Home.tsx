@@ -9,7 +9,7 @@ export default () => {
         console.log("Viktor er gay")
     },[count])
     return (
-        <div className="bg-lightBlueMountain h-screen">
+    <div className="bg-slate-900 h-screen">
             <Navigationbar />
             <div className="justify-center flex">
                 <span className="font-roboto font-bold text-5xl">

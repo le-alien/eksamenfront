@@ -17,7 +17,7 @@ export default () => {
     const apiFetch = async () => {
         try {
             console.log("trying")
-            fetch("http://localhost:7175/api/getAllUsers", {
+            fetch("", {
                 method: "GET",
                 mode: "cors",
             }).then((response) => {
