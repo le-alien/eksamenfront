@@ -1,143 +1,99 @@
-
-import { ReactNode, useEffect, useState } from "react";
-import "../index.css"
+import { useEffect, useState } from "react";
+import "../index.css";
 import ErrorEl from "./ErrorEl";
 import Headerxl from "./Headerxl";
 
-interface userData {
-    bigArr: Array<string | boolean>
+interface UserData {
+    username: string;
+    admin: boolean;
 }
 
-
 export default () => {
-    const [userArr, setUserArr] = useState<Array<any>>([])
+    const [userArr, setUserArr] = useState<UserData[]>([]);
     const [errorField, setErrorField] = useState<string>("");
     const [isAdmin, setIsAdmin] = useState<boolean>();
 
     const apiFetch = async () => {
         try {
-            console.log("trying")
-            fetch("", {
+            const response = await fetch("http://localhost:5000/api/UserController/GetUser", {
                 method: "GET",
                 mode: "cors",
-            }).then((response) => {
-                console.log("res status: ", response.status);
-                return response.json();
-            }).then((data) => {
-                if (data.error) { 
-                    setErrorField(data.error)
-                    if (data.message) {
-                        console.log("There is an error if this message is displayed!", data.message);
-                    }
-                } else {
-                    console.log(data);
-                    data.forEach((obj: Array<any>)=>{
-                        setUserArr((prevUsers: any) => [
-                            ...prevUsers,
-                            {
-                                obj
-                            }
-                        ])
-                    }); // see if changing of obj to userData is good
-
-                };
             });
-        } catch(error) {
-            console.error("error: ", error)
-        }
-    }
 
-    const isAdminCheck = async () => {
-        try {
+            // Check if the response status is OK (200-299)
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
 
+            // Ensure the response is valid JSON
+            const data: any = await response.json().catch(() => {
+                throw new Error("Invalid JSON response");
+            });
+
+
+            if (data.error) {
+                setErrorField(data.error);
+                if (data.message) {
+                }
+            } else {
+                if (Array.isArray(data.users)) { // Ensure data.Users is an array
+                    setUserArr(data.users); // Set userArr with data.Users
+                } else {
+                    console.error("Expected an array but got:", data.users);
+                    setErrorField("Invalid data format received from server.");
+                }
+            }
         } catch (error) {
-            console.error("error: ", error)
         }
-    }
+    };
 
     const changeAdmin = async (username: string, admin: boolean) => {
         try {
-            let isAdminChangeValue = !admin
-            console.log("username of requesting admin change: ", username)
-            fetch(`http://localhost:7175/api/makeAdminUsername/${username}/${isAdminChangeValue}`, {
+            let isAdminChangeValue = !admin;
+            const response = await fetch(`http://localhost:5000/api/UserController/Update${username}/${isAdminChangeValue}`, {
                 method: "GET",
                 mode: "cors",
-            }).then((response) => {
-                return response.json();
-            }).then((data) => {
-                if (data.error) {
-                    console.log("something went wrong: ", data.error)
-                } else {
-                    console.log("gjør ingenting")
-                    setIsAdmin(!isAdmin);
-                    setTimeout(() => {}, 1000);
-                }
-            })
+            });
+
+            // Check if the response status is OK (200-299)
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            // Ensure the response is valid JSON
+            const data = await response.json().catch(() => {
+                throw new Error("Invalid JSON response");
+            });
+
+            if (data.error) {
+            } else {
+                setIsAdmin(!isAdmin);
+                setTimeout(() => {}, 1000);
+            }
         } catch (error) {
-            console.error("error: ", error)
         }
-    }
-
-
-    const printUsers = () => {
-        userArr.map((user, index) =>(
-            <div key={index} className="my-8 w-3/5 h-fit p-2 bg-lightBlueMountain rounded-md">
-                <div className="ml-2">
-                    <div className="flex flex-col mb-2">
-                        <Headerxl>{user.obj.username}</Headerxl>
-                        <span>created: {user.obj.user_timestamp}</span>
-                    </div>
-
-                    <div className="flex flex-col mb-2">
-                        <span>id: {user.obj.user_id}</span>
-                        <span>email: {user.obj.email}</span>
-                    </div>
-                    <div className="flex">
-                        <button className="bg-cloudWhite rounded-md self-end hover:bg-slate-200" onClick={() => changeAdmin(user.obj.username, user.obj.admin)}>change</button>
-                        <span className="ml-2">admin: {user.obj.admin.toString()}</span>
-                    </div>
-                    <div className="flex">
-                        <button className="bg-cloudWhite rounded-md self-end hover:bg-slate-200">change</button>
-                        <span className="ml-2">banned: {user.obj.banned.toString()}</span>
-                    </div>
-                </div>
-            </div>
-        ))
-    }
-    
-    useEffect(() => {
-        apiFetch();
-    },[])
+    };
 
     useEffect(() => {
         apiFetch();
-    }, [isAdmin])
+    }, []);
+
+    useEffect(() => {
+        apiFetch();
+    }, [isAdmin]);
 
     return (
-        <div className="bg-slate-400">
+        <div className="bg-neutral-700">
             <div className="flex items-center flex-col w-screen">
-                {
-
-                }
-                {userArr.map((user, index) =>(
-                    <div key={index} className="my-8 w-3/5 h-fit p-2 bg-lightBlueMountain rounded-md">
+                {userArr.map((user, index) => (
+                    <div key={index} className="my-8 w-3/5 h-fit p-2 bg-stone-900 rounded-md">
                         <div className="ml-2">
                             <div className="flex flex-col mb-2">
-                                <Headerxl>{user.obj.username}</Headerxl>
-                                <span>created: {user.obj.user_timestamp}</span>
-                            </div>
-
-                            <div className="flex flex-col mb-2">
-                                <span>id: {user.obj.user_id}</span>
-                                <span>email: {user.obj.email}</span>
+                                <Headerxl>{user.username}</Headerxl>
                             </div>
                             <div className="flex">
-                                <button className="bg-cloudWhite rounded-md self-end hover:bg-slate-200" onClick={() => changeAdmin(user.obj.username, user.obj.admin)}>change</button>
-                                <span className="ml-2">admin: {user.obj.admin.toString()}</span>
-                            </div>
-                            <div className="flex">
-                                <button className="bg-cloudWhite rounded-md self-end hover:bg-slate-200">change</button>
-                                <span className="ml-2">banned: {user.obj.banned.toString()}</span>
+                                <button className="bg-lightGrayMountain rounded-md self-end hover:bg-stone-800" onClick={() => changeAdmin(user.username, user.admin)}>change</button>
+                                <span className="ml-2">admin: {user.admin.toString()}</span>
                             </div>
                         </div>
                     </div>
@@ -147,6 +103,5 @@ export default () => {
                 <ErrorEl val={errorField}></ErrorEl>
             </div>
         </div>
-        
-    )
-}
+    );
+};

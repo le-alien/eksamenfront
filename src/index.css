@@ -6,24 +6,27 @@
     font-family: "Roboto";
     src: url("./assets/fonts/Roboto/Roboto-Regular.ttf") format("truetype");
     font-weight: 400;
-    font-style: normal;
+    font-style: comic-sans;
     font-display: swap;
+    color:beige;
 }
 
 @font-face {
     font-family: "Roboto";
     src: url("./assets/fonts/Roboto/Roboto-Bold.ttf") format("truetype");
     font-weight: 700;
-    font-style: normal;
+    font-style: comic-sans;
     font-display: swap;
+    color:beige;
 }
 
 @font-face {
     font-family: "Roboto";
     src: url("./assets/fonts/Roboto/Roboto-Medium.ttf") format("truetype");
     font-weight: 500;
-    font-style: normal;
+    font-style: comic-sans;
     font-display: swap;
+    color:beige;
 }
 
 *{
@@ -33,4 +36,9 @@
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+    color:beige;
+}
+
+@input {
+    color : black;
 }

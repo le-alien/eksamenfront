@@ -5,7 +5,7 @@ import "../index.css"
 
 export default () => {
     return (
-        <div>
+        <div className="bg-neutral-700 h-screen">
             <Navigationbar></Navigationbar>
             <Userlist></Userlist>
         </div>

@@ -34,49 +34,55 @@ const ThreadModal: React.FC<Props> = ({isOpen}) => {
     const [title, setTitle] = useState<string>("New Thread");
     const [content, setContent] = useState<string>("What is the thread about");
     const [errorField, setErrorField] = useState<string>("");
+    
     const createThread = async () => {
         try {
-            console.log("trying to make thread")
-            let date = new Date();
-            const body = `{\"username\":\"${localStorage.getItem("username")}\", \"header\":\"${title}\", \"content\":\"${content}\", \"user_id\":\"${localStorage.getItem("user_id")}\", \"board_id\":\"${boardPath}\", \"user_timestamp\":\"${date}\"}`
-            fetch("http://localhost:7175/api/createThread", {
+            console.log("trying to make thread");
+            const body = {
+                Title: title,
+                Content: content,
+                Author: localStorage.getItem("username"),
+                Likes: 0
+            };
+
+            const response = await fetch("http://localhost:5000/api/UserController/CreatePost", {
                 method: "POST",
                 mode: "cors",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.parse(JSON.stringify(body))
-            }).then((response) => {
-                return response.json();
-            }).then((data) => {
-                if (data.error) {
-                    setErrorField(`There was an issue: ${data.error}`)
-                } else {
-                    navigate(`/thread/${data.message}`);
-                }
-            })
+                body: JSON.stringify(body)
+            });
+
+            const data = await response.json();
+            
+            if (response.ok) {
+                navigate(`/thread/${data.title}`);
+            } else {
+                setErrorField(`There was an issue: ${data.error || data.title}`);
+            }
         } catch (error) {
             console.error("error: ", error);
+            setErrorField("An unexpected error occurred");
         }
     }
+
     return (
         <div>
             { isOpen && (
-                <div className="absolute inset-1/2 flex justify-center items-center h-3/5 w-80 flex-col bg-slate-200"
+                <div className="absolute inset-1/2 flex justify-center items-center h-3/5 w-80 flex-col bg-neutral-600"
                 style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }}
                 onMouseDown={handleMouseDown} 
                 onMouseMove={handleMouseMove} 
                 onMouseUp={handleMouseUp}>
-                    <div>
-            
-                    </div>
-                    <div className="bg-slate-600 top-0 absolute cursor-move w-full flex justify-center cursor-grab">
+                
+                    <div className="bg-stone-600 top-0 absolute cursor-move w-full flex justify-center cursor-grab">
                         <span className="text-cloudWhite">Create a new thread</span>
                     </div>
                     <div className="flex flex-col top-0">
                         <span></span>
-                        <input className="mb-2 rounded-mb mb-slate-100" type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" onMouseDown={(e) => e.stopPropagation()}/>
-                        <input type="text" value={content} onChange={(e) => setContent(e.target.value)} placeholder="Content" onMouseDown={(e) => e.stopPropagation()}/>
+                        <input className="mb-2 rounded-mb mb-slate-100 text-black" type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" onMouseDown={(e) => e.stopPropagation()}/>
+                        <input className="text-black"type="text" value={content} onChange={(e) => setContent(e.target.value)} placeholder="Content" onMouseDown={(e) => e.stopPropagation()}/>
                     </div>
                     <div className="mt-2">
                         <button className="bg-lightGrayMountain text-cloudWhite w-14 h-8 rounded-md hover:bg-mediumGrayMountain" onClick={() => {createThread()}}>create!</button>

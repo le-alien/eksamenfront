@@ -28,7 +28,7 @@ const MovableDiv: React.FC = () => {
 
   return (
     <div
-      className="w-32 h-32 bg-blue-500 absolute cursor-move"
+      className="w-32 h-32 bg-blue-500 absolute cursor-move text-black"
       style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}

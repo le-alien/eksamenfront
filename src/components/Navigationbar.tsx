@@ -8,11 +8,11 @@ export const Navigationbar: React.FC = () => {
     const navigate = useNavigate();
     localStorage.setItem('loggedinn', "true")
     return (
-        <div className="h-13 bg-darkBlueMountain flex items-center flex-row">
+        <div className="h-13 bg-stone-900 flex items-center flex-row rounded-lg">
             <div className="text-3xl ml-4 flex-row">
                 <Link to="/" className="flex">
                     <span className="font-roboto font-bold">
-                        Something
+                        Episk
                     </span>
                     <span className="font-roboto">
                         Forum

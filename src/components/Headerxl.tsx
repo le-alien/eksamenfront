@@ -6,7 +6,7 @@ interface Props {
 
 const Headerxl: React.FC<Props> = ({ children }) => {
     return (
-        <h2 className="text-xl">
+        <h2 className="text-xl font-bold">
             {children}
         </h2>
     )

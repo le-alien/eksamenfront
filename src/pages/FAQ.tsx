@@ -3,7 +3,8 @@ import Headerxl from "../components/Headerxl"
 
 const FAQ = () => {
   return (
-    <div>
+    
+    <div className='bg-neutral-700 h-screen'>
       <Navigationbar/>
       <div className="flex justify-center items-center flex-col">
         <h1 className='text-3xl'>

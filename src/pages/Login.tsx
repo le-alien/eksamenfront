@@ -43,13 +43,13 @@ export default () => {
     }
 
     return(
-    <div>
+    <div className="bg-neutral-700 h-screen">
         <Navigationbar></Navigationbar>
         <div className="flex justify-center flex-col justify-items-center max-w-30 m-1">
-            <h2 className="self-center">Login!</h2>
-            <input className="my-2 w-20 self-center" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="username"></input>
-            <input className="my-2 w-20 self-center" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="password"></input>
-            <button onClick={checkInfo}>send</button>
+            <h2 className="self-center">Login</h2>
+            <input className="my-2 w-200 self-center text-black" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="username"></input>
+            <input className="my-2 w-200 self-center text-black" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="password"></input>
+            <button className="bg-lightGrayMountain w-14 text-cloudWhite rounded-md self-center" onClick={checkInfo}>send</button>
         </div>
         <div className="flex w-screen justify-center my-10">
             <ErrorEl val={errorField}></ErrorEl>

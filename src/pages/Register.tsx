@@ -47,12 +47,12 @@ export default function Register() {
     }
     return(
     
-    <div>
+    <div className="bg-neutral-700 h-screen">
         <Navigationbar></Navigationbar>
         <div className="flex justify-center flex-col justify-items-center w-screen m-1 items-center">
-            <h2 className="self-center">Register!</h2>
-            <input className="my-2 w-20 self-center" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="username"></input>
-            <input className="my-2 w-20 self-center" value={passwordhash} onChange={(e) => setPassword(e.target.value)} placeholder="password"></input>
+            <h2 className="self-center">Register</h2>
+            <input className="my-2 w-200 self-center text-black" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="username"></input>
+            <input className="my-2 w-200 self-center text-black" type="password" value={passwordhash} onChange={(e) => setPassword(e.target.value)} placeholder="password"></input>
             <button className="bg-lightGrayMountain w-14 text-cloudWhite rounded-md" onClick={checkInfo}>send</button>
         </div>
         <div className="flex w-screen justify-center my-10">
