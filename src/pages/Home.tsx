@@ -89,13 +89,6 @@ export default () => {
                     </div>
                 </div>
             </div>
-
-
-            <button onClick={() => setCount(count + 1)}>
-                INCREMENT
-            </button>
-
-            <p>{count}</p>
         </div>
     )
 }
