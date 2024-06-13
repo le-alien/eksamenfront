@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Navigationbar from "../components/Navigationbar.tsx"
 import "../index.css"
 import Headerxl from "../components/Headerxl.tsx";
 
 export default () => {
-    const [count, setCount] = useState<number>(0);
+    const [count] = useState<number>(0);
     useEffect(() => {
     },[count])
     return (

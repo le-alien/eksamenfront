@@ -1,66 +1,19 @@
 
-import { ReactNode, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import "../index.css"
 import ErrorEl from "./ErrorEl";
 import Headerxl from "./Headerxl";
-import { useLocation } from "react-router-dom";
 
-interface userData {
-    bigArr: Array<string | boolean>
-}
+
 
 
 const ThreadList: React.FC = () => {
-    const [userArr, setUserArr] = useState<Array<any>>([])
-    const [errorField, setErrorField] = useState<string>("");
-    const [isAdmin, setIsAdmin] = useState<boolean>();
+    const [userArr] = useState<Array<any>>([])
+    const [errorField] = useState<string>("");
 
-    const createThread = async () => {
-        try {
-            const location = useLocation();
-            const currentPath = location.pathname;
-            console.log(currentPath)
-            fetch("http://localhost:7175/api/", {
 
-            })
 
-        } catch(error) {
-            console.error("erorr: ", error)
-        }
-    }
-
-    const getThreads = async () => {
-        try {
-            console.log("trying")
-            fetch("http://localhost:7175/api/getThreadsBoardid/", {
-                method: "GET",
-                mode: "cors",
-            }).then((response) => {
-                console.log("res status: ", response.status);
-                return response.json();
-            }).then((data) => {
-                if (data.error) { 
-                    setErrorField(data.error)
-                    if (data.message) {
-                        console.log("There is an error if this message is displayed!", data.message);
-                    }
-                } else {
-                    console.log(data);
-                    data.forEach((obj: Array<any>)=>{
-                        setUserArr((prevUsers: any) => [
-                            ...prevUsers,
-                            {
-                                obj
-                            }
-                        ])
-                    }); // see if changing of obj to userData is good
-
-                };
-            });
-        } catch(error) {
-            console.error("error: ", error)
-        }
-    }
+    
 
     const changeAdmin = async (username: string, admin: boolean) => {
         try {

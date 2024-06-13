@@ -69,7 +69,7 @@ const GeneralBoard: React.FC = () => {
                     threadArr.map((thread, index) => (
                         <div
                             key={index}
-                            className="bg-stone-800 my-8 w-3/5 h-fit p-2 hover:bg-darkBlueMountain bg-lightBlueMountain rounded-md hover:cursor-pointer"
+                            className="bg-stone-800 my-8 w-3/5 h-fit p-2 hover:bg-stone-700 bg-lightBlueMountain rounded-md hover:cursor-pointer"
                             onClick={() => navigate(`/threads/${thread.thread_id}`)}
                         >
                             <div className="ml-2" >

@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Headerxl from "../components/Headerxl";
 
 
 const Thread: React.FC = () => {
-    const { id } = useParams<{id: string }>();
+    const { Title } = useParams<{Title: string }>();
     const [thread, setThread] = useState<any>();
     
     
     const fetchThread = async () => {
         try {
-            fetch(`http://localhost:5000/api/GetPost/${id}`, {
+            fetch(`http://localhost:5000/api/GetPost/${Title}`, {
                 method: "GET",
                 mode: "cors",
             }).then((response) => {

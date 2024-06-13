@@ -18,6 +18,7 @@ export default function Register() {
                 const body = {
                     "Username": username,
                     "Password": passwordhash,
+                    "Admin": false
                 };
 
                 const response = await fetch("http://localhost:5000/api/UserController/Register", {
@@ -49,7 +50,7 @@ export default function Register() {
     
     <div className="bg-neutral-700 h-screen">
         <Navigationbar></Navigationbar>
-        <div className="flex justify-center flex-col justify-items-center w-screen m-1 items-center">
+        <div className="flex justify-center flex-col justify-items-center w-600 m-1 items-center">
             <h2 className="self-center">Register</h2>
             <input className="my-2 w-200 self-center text-black" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="username"></input>
             <input className="my-2 w-200 self-center text-black" type="password" value={passwordhash} onChange={(e) => setPassword(e.target.value)} placeholder="password"></input>

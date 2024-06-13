@@ -20,57 +20,69 @@ export default () => {
                 mode: "cors",
             });
 
-            // Check if the response status is OK (200-299)
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            // Ensure the response is valid JSON
             const data: any = await response.json().catch(() => {
                 throw new Error("Invalid JSON response");
-            });
-
+            }) as any;
 
             if (data.error) {
                 setErrorField(data.error);
-                if (data.message) {
-                }
             } else {
-                if (Array.isArray(data.users)) { // Ensure data.Users is an array
-                    setUserArr(data.users); // Set userArr with data.Users
+                if (Array.isArray(data.users)) {
+                    setUserArr(data.users);
                 } else {
                     console.error("Expected an array but got:", data.users);
                     setErrorField("Invalid data format received from server.");
                 }
             }
-        } catch (error) {
+        }  catch (error) {
+            if (error instanceof Error) {
+                setErrorField(error.message);
+            }
+            else {
+                throw error;
+            }
         }
     };
 
     const changeAdmin = async (username: string, admin: boolean) => {
         try {
-            let isAdminChangeValue = !admin;
-            const response = await fetch(`http://localhost:5000/api/UserController/Update${username}/${isAdminChangeValue}`, {
-                method: "GET",
-                mode: "cors",
+            const response = await fetch("http://localhost:5000/api/UserController/Update", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    Username: username,
+                    Password: "",
+                    Admin: !admin,
+                }),
             });
 
-            // Check if the response status is OK (200-299)
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            // Ensure the response is valid JSON
             const data = await response.json().catch(() => {
                 throw new Error("Invalid JSON response");
             });
 
             if (data.error) {
+                setErrorField(data.message);
             } else {
-                setIsAdmin(!isAdmin);
-                setTimeout(() => {}, 1000);
+                setIsAdmin(!admin);
+                apiFetch();
             }
         } catch (error) {
+            if (error instanceof Error) {
+                setErrorField(error.message);
+            }
+            else {
+                throw error;
+            }
         }
     };
 

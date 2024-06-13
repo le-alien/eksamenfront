@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import {  useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ErrorEl from "./ErrorEl";
 
 interface Props {
@@ -8,8 +8,6 @@ interface Props {
 
 const ThreadModal: React.FC<Props> = ({isOpen}) => {
     const navigate = useNavigate();
-    const location = useLocation();
-    const boardPath = location.pathname.slice(1);
 
     const [pos, setPos] = useState({ x: -500, y: -250 });
     const [dragging, setDragging] = useState(false);
